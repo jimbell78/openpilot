@@ -1,0 +1,78 @@
+CANParser: 0x1aa CRUISE_BUTTONS_ALT not valid (timeout or missing)
+CANParser: 0x100 ACCELERATOR_BRAKE_ALT not valid (timeout or missing)
+CANParser: 0x175 TCS not valid (timeout or missing)
+CANParser: 0x411 DOORS_SEATBELTS not valid (timeout or missing)
+CANParser: 0x130 GEAR_SHIFTER not valid (timeout or missing)
+CANParser: 0xa0 WHEEL_SPEEDS not valid (timeout or missing)
+CANParser: 0x125 STEERING_SENSORS not valid (timeout or missing)
+CANParser: 0xea MDPS not valid (timeout or missing)
+CANParser: 0x413 BLINKERS not valid (timeout or missing)
+CANParser: 0x1aa CRUISE_BUTTONS_ALT not valid (timeout or missing)
+CANParser: 0x100 ACCELERATOR_BRAKE_ALT not valid (timeout or missing)
+CANParser: 0x175 TCS not valid (timeout or missing)
+CANParser: 0x411 DOORS_SEATBELTS not valid (timeout or missing)
+CANParser: 0x130 GEAR_SHIFTER not valid (timeout or missing)
+CANParser: 0xa0 WHEEL_SPEEDS not valid (timeout or missing)
+CANParser: 0x125 STEERING_SENSORS not valid (timeout or missing)
+CANParser: 0xea MDPS not valid (timeout or missing)
+CANParser: 0x413 BLINKERS not valid (timeout or missing)
+CANParser: 0x1aa CRUISE_BUTTONS_ALT not valid (timeout or missing)
+CANParser: 0x100 ACCELERATOR_BRAKE_ALT not valid (timeout or missing)
+CANParser: 0x175 TCS not valid (timeout or missing)
+CANParser: 0x411 DOORS_SEATBELTS not valid (timeout or missing)
+CANParser: 0x130 GEAR_SHIFTER not valid (timeout or missing)
+CANParser: 0xa0 WHEEL_SPEEDS not valid (timeout or missing)
+CANParser: 0x125 STEERING_SENSORS not valid (timeout or missing)
+CANParser: 0xea MDPS not valid (timeout or missing)
+CANParser: 0x413 BLINKERS not valid (timeout or missing)
+== parked: candidate=HYUNDAI_STARIA_4TH_GEN_NON_SCC dashcamOnly=False long=False pcmCruise=True radarUnavailable=True steerRatio=17.5 safety=hyundaiCanfd param=40 spParam=8 spFlags=64 lateralTuning=torque
+frames=6140 canValid false frames=2 (first after warmup at Nones)
+safety rx-check invalid ticks=0/61  lat_active frames=0  final panda lat=True controls_allowed(full)=False relay_malfunction=False
+  accFaulted=False: 6140
+  brakePressed: 2653
+  buttonEvent.lkas.pressed: 2
+  buttonEvent.lkas.released: 2
+  buttonEvent.mainCruise.pressed: 1
+  buttonEvent.mainCruise.released: 1
+  cruise.available=False: 6140
+  cruise.enabled=False: 6140
+  gasPressed: 494
+  gear=park: 6139
+  gear=unknown: 1
+  safety_ticks: 61
+  tx.0x12a.bus0.ok: 6140
+  tx.0x1e0.bus0.ok: 1228
+== drive: candidate=HYUNDAI_STARIA_4TH_GEN_NON_SCC dashcamOnly=False long=False pcmCruise=True radarUnavailable=True steerRatio=17.5 safety=hyundaiCanfd param=40 spParam=8 spFlags=64 lateralTuning=torque
+frames=6000 canValid false frames=6 (first after warmup at Nones)
+safety rx-check invalid ticks=0/59  lat_active frames=3999  final panda lat=True controls_allowed(full)=False relay_malfunction=False
+  accFaulted=False: 6000
+  brakePressed: 2922
+  buttonEvent.lkas.pressed: 1
+  buttonEvent.lkas.released: 1
+  cruise.available=False: 6000
+  cruise.enabled=False: 6000
+  gasPressed: 2209
+  gear=drive: 5999
+  gear=unknown: 1
+  safety_ticks: 59
+  tx.0x12a.bus0.ok: 2001
+  tx.0x12a.bus0.ok.lat: 3999
+  tx.0x1e0.bus0.ok: 401
+  tx.0x1e0.bus0.ok.lat: 799
+== drive: candidate=HYUNDAI_STARIA_4TH_GEN_NON_SCC dashcamOnly=False long=False pcmCruise=True radarUnavailable=True steerRatio=17.5 safety=hyundaiCanfd param=40 spParam=8 spFlags=64 lateralTuning=torque
+frames=6000 canValid false frames=6 (first after warmup at Nones)
+safety rx-check invalid ticks=0/59  lat_active frames=2996  final panda lat=False controls_allowed(full)=False relay_malfunction=False
+  accFaulted=False: 6000
+  brakePressed: 2922
+  buttonEvent.lkas.pressed: 1
+  buttonEvent.lkas.released: 1
+  cruise.available=False: 6000
+  cruise.enabled=False: 6000
+  gasPressed: 2209
+  gear=drive: 5999
+  gear=unknown: 1
+  safety_ticks: 59
+  tx.0x12a.bus0.ok: 3004
+  tx.0x12a.bus0.ok.lat: 2996
+  tx.0x1e0.bus0.ok: 601
+  tx.0x1e0.bus0.ok.lat: 599
