@@ -8,7 +8,9 @@ Replay Jim's Staria CAN logs through the staria-tr-3x opendbc port:
 The logs were recorded with the relay CLOSED (bus 0 == bus 2), so for the safety replay the camera's own
 LFA/LFAHDA frames (0x12A/0x1E0) are removed from bus 0, which is what the panda sees with the harness relay open.
 """
-import os, pickle, sys, collections
+import os
+import pickle
+import collections
 import numpy as np
 from opendbc.car import structs, gen_empty_fingerprint
 from opendbc.car.car_helpers import interfaces
@@ -58,10 +60,12 @@ def main(name, inject_press_at=None, mads_brake_mode=(False, False)):
   CP_SP = CI.get_params_sp(CP, candidate, fingerprint, car_fw, False, False, False)
   ci = CI(CP, CP_SP)
   sc = CP.safetyConfigs[-1]
-  print(f"== {name}: candidate={CP.carFingerprint} dashcamOnly={CP.dashcamOnly} long={CP.openpilotLongitudinalControl} "
-        f"pcmCruise={CP.pcmCruise} radarUnavailable={CP.radarUnavailable} steerRatio={CP.steerRatio} "
-        f"safety={sc.safetyModel} param={sc.safetyParam} spParam={CP_SP.safetyParam} spFlags={CP_SP.flags} "
-        f"lateralTuning={CP.lateralTuning.which()}")
+  print(" ".join([
+    f"== {name}: candidate={CP.carFingerprint} dashcamOnly={CP.dashcamOnly} long={CP.openpilotLongitudinalControl}",
+    f"pcmCruise={CP.pcmCruise} radarUnavailable={CP.radarUnavailable} steerRatio={CP.steerRatio}",
+    f"safety={sc.safetyModel} param={sc.safetyParam} spParam={CP_SP.safetyParam} spFlags={CP_SP.flags}",
+    f"lateralTuning={CP.lateralTuning.which()}",
+  ]))
 
   # --- panda safety ---
   safety = libsafety_py.libsafety
@@ -141,9 +145,12 @@ def main(name, inject_press_at=None, mads_brake_mode=(False, False)):
       stats[f"tx.{hex(a)}.bus{s}.{'ok' if ok else 'BLOCKED'}" + (".lat" if lat_active else "")] += 1
 
   print(f"frames={len(log)} canValid false frames={can_invalid_frames} (first after warmup at {first_invalid}s)")
-  print(f"safety rx-check invalid ticks={rx_invalid_ticks}/{stats['safety_ticks']}  lat_active frames={sum(lat_hist)}  "
-        f"final panda lat={safety.get_controls_allowed_lateral()} controls_allowed(full)={safety.get_controls_allowed()} "
-        f"relay_malfunction={safety.get_relay_malfunction()}")
+  print("  ".join([
+    f"safety rx-check invalid ticks={rx_invalid_ticks}/{stats['safety_ticks']}",
+    f"lat_active frames={sum(lat_hist)}",
+    f"final panda lat={safety.get_controls_allowed_lateral()} controls_allowed(full)={safety.get_controls_allowed()}"
+    + f" relay_malfunction={safety.get_relay_malfunction()}",
+  ]))
   for k in sorted(stats):
     print(f"  {k}: {stats[k]}")
   return stats

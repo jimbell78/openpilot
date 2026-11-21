@@ -1,7 +1,13 @@
 # Minimal rlog CAN reader for Jim's 0.9.7/0.9.8 logs (cereal schema from openpilot v0.9.8)
-import bz2, io, capnp, zstandard
+import bz2
+import io
+import os
+import capnp
+import zstandard
 capnp.remove_import_hook()
-_log = capnp.load('/workspace/staria/op098/cereal/log.capnp', imports=['/workspace/staria/op098/cereal', '/workspace/staria/op098/cereal/include'])
+# path to an openpilot v0.9.8 checkout's cereal/ directory (the logs use that schema)
+_CEREAL = os.environ.get('STARIA_CEREAL_DIR', 'cereal')
+_log = capnp.load(os.path.join(_CEREAL, 'log.capnp'), imports=[_CEREAL, os.path.join(_CEREAL, 'include')])
 
 def _raw(path):
   d = open(path, 'rb').read()

@@ -1,4 +1,4 @@
-# staria-pilot
+# staria-pilot (jimbell78/openpilot, branch `staria-tr-3x`)
 
 **Steering-only sunnypilot port for the 2023 Hyundai Staria (Turkish/European market, no radar, no BSM, no factory smart cruise).**
 
@@ -14,7 +14,7 @@
 - Adds the car `HYUNDAI_STARIA_4TH_GEN_NON_SCC` ("Hyundai Staria Non-SCC 2023") and a new **non-SCC CAN-FD panda safety configuration**. Details: [PORT_NOTES.md](PORT_NOTES.md).
 - **Lateral (steering) control only, no longitudinal control.** Engage/disengage steering with the steering-wheel lane-assist (LDA) button via sunnypilot MADS.
 - Lateral tune: steerRatio **17.5** (measured from a real drive), torque values substituted from the Korean/SCC `HYUNDAI_STARIA_4TH_GEN`. Both are learned online by paramsd/torqued.
-- Self-contained: `opendbc_repo/` is vendored as plain files (it contains the car port and the panda safety code). The other submodules point to public upstream repositories.
+- `opendbc_repo/` (the car port and the panda safety code) and `tinygrad_repo/` (sunnypilot/tinygrad @ `92b742f`) are vendored as plain files. The other submodules (panda, msgq, rednose, teleoprtc, neural_network_data) are small and point to their public upstream repositories.
 
 Branch: **`staria-tr-3x`**
 
@@ -29,15 +29,20 @@ Branch: **`staria-tr-3x`**
 - Steering torque limits, driver override, brake/gas disengage, and relay checks are **identical** to sunnypilot's existing CAN-FD LFA mode. Nothing is relaxed.
 
 ## Install (comma 3X)
-The comma "Custom Software" URL **cannot** install this repo: the web installers only clone repos named `openpilot` (`installer.comma.ai/<user>/<branch>`) or `sunnypilot` (`install.sunnypilot.ai/fork/<user>/<branch>`). Install over SSH instead:
+On the setup screen choose **Custom Software** and enter:
+```
+installer.comma.ai/jimbell78/staria-tr-3x
+```
+The download is about 1 GB, so use good Wi-Fi and constant power. The first boot then compiles on the device for 10–30+ minutes.
 
+If the web installer hangs, install over SSH (Settings → Developer → Enable SSH + your GitHub username under SSH Keys):
 ```bash
 ssh comma@<device-ip>
-cd /data && mv openpilot openpilot.bak
-git clone --recurse-submodules --depth=1 -b staria-tr-3x https://github.com/jimbell78/staria-pilot.git openpilot
+cd /data && rm -rf openpilot
+git clone -b staria-tr-3x --depth 1 --recurse-submodules https://github.com/jimbell78/openpilot.git openpilot
 cd openpilot && git lfs pull && sudo reboot
 ```
-The first boot compiles for 10–20+ minutes. Full steps (enabling SSH, GitHub keys, rollback, settings): **[INSTALL.md](INSTALL.md)**.
+Full steps (setup-screen case, rollback, settings): **[INSTALL.md](INSTALL.md)**.
 
 ## First drive (summary)
 Full list: **[FIRST_DRIVE_CHECKLIST.md](FIRST_DRIVE_CHECKLIST.md)**.

@@ -7,9 +7,10 @@ Prepared 2026-11-21 (Europe/Istanbul).
 | Part | Based on | Port changes |
 |---|---|---|
 | repository root | sunnypilot/sunnypilot master @ `a4f7d05` | no code changes in sunnypilot itself; opendbc is vendored; docs added; upstream `.github/workflows` removed so sunnypilot's CI does not run on this fork |
+| `tinygrad_repo/` (vendored, plain files, not a submodule) | sunnypilot/tinygrad @ `92b742f` (the commit sunnypilot `a4f7d05` pins) | none; vendored so installs don't download tinygrad's ~1.7 GB history. Excluded from LFS in `.gitattributes` |
 | `opendbc_repo/` (vendored, plain files, not a submodule) | sunnypilot/opendbc @ `eaca1a8` | opendbc commits `1437597` (fingerprint + platform) and `68e48ca` (safety mode + lateral-only port), exported with `git archive 68e48ca` |
 
-The other submodules (panda, msgq, rednose, teleoprtc, tinygrad, neural_network_data) are unchanged and point to their public upstream repositories at the commits sunnypilot `a4f7d05` pins. Panda firmware safety code is compiled from `opendbc_repo/opendbc/safety`, so the safety changes below are what the device flashes.
+The other submodules (panda, msgq, rednose, teleoprtc, neural_network_data) are unchanged and point to their public upstream repositories at the commits sunnypilot `a4f7d05` pins. Panda firmware safety code is compiled from `opendbc_repo/opendbc/safety`, so the safety changes below are what the device flashes.
 
 Tools in `staria/tools/` (`logcan.py`, `dump_can.py`, `replay_staria.py`) were used for the log replay; their output is in `staria/replay_staria_output.txt`. Jim's raw logs are not included (they contain the VIN).
 
@@ -76,4 +77,4 @@ The CRC XOR (0x041D) matches the opendbc packer (`hkg_can_fd_checksum`) and **al
 5. LDA_BTN semantics while driving (only seen parked). Whether the factory lane-assist toggling interferes with MADS is unknown.
 6. A European/other-market *SCC* Staria with the same camera FW: guarded to dashcam by the 0x1A0 check, but this has not been tested on such a car.
 7. Whether the device builds cleanly from this master-based branch (not prebuilt). The opendbc/panda code was tested, but the full sunnypilot build was not run here.
-8. No web installer URL supports this repository name; install is via SSH + git clone (see INSTALL.md).
+8. Install via `installer.comma.ai/jimbell78/staria-tr-3x` or SSH + git clone (see INSTALL.md); neither has been run on a device yet.

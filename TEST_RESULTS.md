@@ -39,6 +39,11 @@ Panda safety (relay-open emulation, both logs):
 - CarController driven by MADS with the factory LFA torque as request: **21,768 / 21,768 TX frames accepted, 0 blocked** (0x12A and 0x1E0 only; 3,999 lateral-active frames in the drive)
 - with "disengage on brake", lateral drops at the first brake press
 
+## Re-run after vendoring tinygrad (2026-11-21, fresh clone of the branch)
+Same results on a fresh `git clone --depth=1 --recurse-submodules` of this branch: opendbc car 842 OK, sunnypilot car 24 OK, safety 9,821 OK (non-SCC 474 OK), MISRA Success, ruff (root and opendbc) and ty clean, `compileall` OK, log replay output byte-identical, `scons -n` (PC) OK. `opendbc_repo/` and panda are unchanged by that commit.
+
+Installer clone (same command as `installer.comma.ai`, simulated on a fast connection): before, the tinygrad submodule alone downloaded 1.66 GiB of history (checkout 3.6 GB, ~118 s, most of it at "90–92%"); after, the whole checkout is ~1.9 GB (of which ~0.9 GB are LFS model files) and took ~23 s.
+
 ## Not tested
 - On-device build of this branch and any driving with openpilot steering. The EPS accepting openpilot's 0x12A is inferred from the factory frames and from other CAN-FD LFA cars.
 - openpilot `process_replay` (needs a full device build and CI reference logs that don't exist for this car).
